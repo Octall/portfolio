@@ -4,12 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mahmoud Sadeq — Robotics &amp; Mechatronics Engineer</title>
-<meta name="description" content="Robotics &amp; Mechatronics engineer (BEng, First Class, University of Sussex). Built MEES: an autonomous magnetic tool changer for the Kinova Gen3 — 102 consecutive swaps, zero mechanical failures.">
+<meta name="description" content="Robotics &amp; mechatronics engineer (BEng, First Class, University of Sussex, 2026). Built MEES, an autonomous magnetic tool changer for the Kinova Gen3: 102 consecutive swaps, zero mechanical failures.">
 <link rel="canonical" href="https://mahmoud.tasarro.co.uk/">
+<meta name="theme-color" content="#F7F7F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0E13" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Mahmoud Sadeq — Robotics &amp; Mechatronics Engineer">
-<meta property="og:description" content="Robots that check their own work: autonomous tool switching, compliant-control platforms, and the firmware underneath.">
+<meta property="og:description" content="Robots that check their own work: autonomous tool switching, compliant-control platforms, and the firmware and silicon underneath.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mahmoud.tasarro.co.uk/">
+<meta property="og:image" content="https://mahmoud.tasarro.co.uk/assets/mees-wrist-coupling.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script>document.documentElement.classList.add('js')</script>
@@ -23,311 +28,459 @@
   "alumniOf": "University of Sussex",
   "email": "mailto:m.sadeq@tasarro.co.uk",
   "url": "https://mahmoud.tasarro.co.uk/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Brighton", "addressCountry": "GB" },
+  "knowsLanguage": ["English", "Arabic"],
   "sameAs": ["https://github.com/Octall"]
 }
 </script>
 </head>
 <body>
-<div class="pageframe" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<nav class="site-nav" aria-label="Site">
-  <div class="wrap">
-    <a class="nav-name" href="#top">m.sadeq</a>
-    <ul>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#research">research</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#about">about</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<main id="main">
-<header class="hero wrap" id="top">
-  <div class="titleblock">
-    <div class="tb-cell tb-name">
-      <span class="lbl">Name</span>
-      <h1>Mahmoud Sadeq</h1>
-      <p class="role">Robotics &amp; Mechatronics Engineer</p>
-    </div>
-    <div class="tb-cell tb-rev"><span class="lbl">Rev</span><span class="val">05</span></div>
-    <div class="tb-cell tb-date endrow"><span class="lbl">Date</span><span class="val">2026-08-04</span></div>
-    <div class="tb-cell tb-degree"><span class="lbl">Qualification</span><span class="val">BEng Robotics Engineering &amp; Mechatronics — First Class Honours, University of Sussex, 2026</span></div>
-    <div class="tb-cell tb-loc"><span class="lbl">Location</span><span class="val">Brighton, UK — open to relocation</span></div>
-    <div class="tb-cell tb-contact endrow"><span class="lbl">Contact</span><span class="val"><a href="mailto:m.sadeq@tasarro.co.uk">m.sadeq@tasarro.co.uk</a><br><a href="https://github.com/Octall">github.com/Octall</a></span></div>
-  </div>
-  <div class="row abstract">
-    <p class="marginlabel c-left">General notes</p>
-    <p class="lede c-main">I build robots that check their own work. My dissertation
-    platform swaps its own tools and recovers when an exchange fails, with no operator
-    in the loop. Everything on this sheet is measured, logged, or in a repository —
-    nothing is an artist's impression.</p>
+<header class="site-nav" id="site-nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Mahmoud Sadeq — back to top">
+      <span class="brand-mark" aria-hidden="true">MS</span>
+      <span class="brand-name">Mahmoud Sadeq</span>
+    </a>
+    <nav aria-label="Site">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#strengths">Strengths</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary btn-sm nav-cta" href="#contact">Get in touch</a>
+    <button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false">
+      <span class="visually-hidden">Menu</span><span class="bars" aria-hidden="true"></span>
+    </button>
   </div>
 </header>
 
-<div class="stats wrap" role="group" aria-label="Measured performance">
-  <p class="spec-caption">Table 1 — measured performance</p>
-  <div class="wrap-inner">
-    <div class="stat"><b data-count="102">102</b><span>consecutive autonomous tool swaps, zero mechanical failures, in the primary 67-minute trial</span></div>
-    <div class="stat"><b data-count="100" data-suffix="%">100%</b><span>mechanical success across all 147 post-development swap attempts</span></div>
-    <div class="stat"><b data-count="39.3" data-dec="1" data-suffix=" s">39.3&thinsp;s</b><span>mean swap time, command to confirmed tool-mounted</span></div>
-    <div class="stat"><b data-count="1.36" data-dec="2">1.36</b><span>CoreMark/MHz — RV32I CPU I wrote in SystemVerilog, measured on Artix-7 silicon</span></div>
+<main id="main">
+
+<!-- ═══ Hero ═══ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="availability"><span class="pulse" aria-hidden="true"></span>Open to robotics, embedded &amp; controls roles · UK or relocation</p>
+      <p class="hero-name">Mahmoud Sadeq <span>— Robotics &amp; Mechatronics Engineer</span></p>
+      <h1>I build robots that <em>check their own work.</em></h1>
+      <p class="hero-lede">First-Class BEng from the University of Sussex (2026). I take systems
+      from the PCB and firmware up to ROS&nbsp;2 orchestration, then prove they hold up with
+      logged, repeatable trials. My dissertation robot swaps its own tools and recovers when an
+      exchange fails, with nobody in the loop.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="mailto:m.sadeq@tasarro.co.uk">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm2 .6v.3l7 4.9 7-4.9v-.3H5Zm14 2.7-6.4 4.5a1 1 0 0 1-1.2 0L5 9.8V17h14V9.8Z"/></svg>
+          Email me</a>
+        <a class="btn btn-ghost" href="#work">See my work <span aria-hidden="true">→</span></a>
+        <a class="btn btn-icon" href="https://github.com/Octall" aria-label="GitHub profile: Octall">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+        </a>
+      </div>
+      <ul class="hero-facts">
+        <li><b>BEng, First Class</b><span>University of Sussex, 2026</span></li>
+        <li><b>First-author paper</b><span>ICRA submission, Sep 2026</span></li>
+        <li><b>Brighton, UK</b><span>English (C1) · Arabic (native)</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <figure class="hero-photo">
+        <img src="assets/mees-wrist-coupling.jpg" width="1400" height="1867"
+          alt="The wrist-side half of the MEES magnetic tool coupling mounted on a Kinova Gen3 robot arm, with the arm's camera module above it"
+          fetchpriority="high">
+        <figcaption>MEES coupling on a Kinova Gen3 — my dissertation hardware.</figcaption>
+      </figure>
+      <div class="float-card fc-log" aria-hidden="true">
+        <span class="fc-label">trial log · 08 May 2026</span>
+        <span class="fc-big">102 / 102</span>
+        <span class="fc-sub">autonomous swaps · 0 faults</span>
+      </div>
+      <div class="float-card fc-stack" aria-hidden="true">
+        <span class="fc-label">stack</span>
+        <span class="fc-chips"><i>ROS 2</i><i>C++</i><i>OpenCV</i><i>RTOS</i><i>PCB</i></span>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<section id="projects" class="wrap">
-  <div class="sec-head"><span class="secnum">1.0</span><h2>Projects</h2></div>
+<!-- ═══ Proof strip ═══ -->
+<section class="proof" aria-label="Measured results">
+  <div class="container proof-grid">
+    <div class="stat"><b data-count="102">102</b><span>consecutive autonomous tool swaps with zero mechanical failures in a 67-minute trial</span></div>
+    <div class="stat"><b data-count="147" data-suffix="/147">147/147</b><span>mechanical success across every post-development swap attempt</span></div>
+    <div class="stat"><b data-count="39.3" data-dec="1" data-suffix=" s">39.3&thinsp;s</b><span>mean swap, from command to confirmed tool-mounted</span></div>
+    <div class="stat"><b data-count="1.36" data-dec="2">1.36</b><span>CoreMark/MHz on my own RV32I CPU, measured on Artix-7 silicon</span></div>
+  </div>
+</section>
 
-  <article class="project">
-    <h3><span class="pnum">1.1</span>MEES — Modular End Effector System</h3>
-    <ul class="tags"><li>ROS 2</li><li>C++</li><li>OpenCV</li><li>RTOS</li><li>custom PCB</li><li>Kinova Gen3</li></ul>
-    <p>Commercial automatic tool changers are expensive, heavy, and rely on pneumatics
-    that lightweight collaborative arms don't have. MEES is my answer for the Kinova
-    Gen3: a low-cost, magnetically actuated, ISO&nbsp;9409-compliant tool changer plus
-    the software to use it with nobody watching. The use-case I designed and evaluated it
-    against is surgical: instruments that need exchanging mid-procedure, reliably, without
-    anyone stepping in. The engineering itself is general tool-switching.</p>
-    <p>A vision-guided ROS&nbsp;2 orchestrator reads each tool's Data Matrix barcode from
-    the arm's own camera to know what it's holding. Under it sits <em>UserBridge</em>,
-    a C++ layer I wrote over the Kinova Kortex SDK that exposes the arm's expansion
-    port — UART, I²C, GPIO, Ethernet — to the actuator microcontrollers below. An RTOS
-    runs the tool carousel, and a custom PCB carries power and data through the
-    coupling face.</p>
-    <p>The primary reliability trial ran 102 consecutive autonomous swaps over 67 minutes
-    without a single mechanical failure, averaging 39.3&nbsp;seconds from command to
-    confirmed tool-mounted. Counting every post-development attempt, the tally is 147 out
-    of 147. When an exchange does go wrong the system notices and recovers on its own —
-    I tested that by forcing exchanges to fail, not by hoping they wouldn't. A new tool
-    joins the carousel with one scan command and zero code changes.</p>
+<!-- ═══ Strengths ═══ -->
+<section class="section" id="strengths">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">What I bring to a team</p>
+      <h2>An engineer who can follow a bug through every layer of the robot.</h2>
+    </div>
+    <div class="strengths">
+      <article class="strength reveal">
+        <span class="s-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="10" cy="17" r="1.6"/></svg></span>
+        <h3>Whole-stack robotics</h3>
+        <p>ROS&nbsp;2 orchestration, machine vision, a C++ bridge over a vendor SDK, a custom
+        PCB and RTOS firmware, designed and built as one system. I can work at whichever layer
+        your problem lives in.</p>
+      </article>
+      <article class="strength reveal">
+        <span class="s-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 15l3-4 3 2 5-7"/></svg></span>
+        <h3>Reliability you can measure</h3>
+        <p>Fault injection, cycle logging and long unattended trials. I force failures to test
+        recovery rather than hoping they won't happen, and I publish the failing test instead
+        of hiding it.</p>
+      </article>
+      <article class="strength reveal">
+        <span class="s-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span>
+        <h3>Down to the silicon</h3>
+        <p>A RISC-V CPU written from scratch in SystemVerilog, register-level C under hard
+        timing, and serial protocols designed to survive a lost reply. The bottom of the
+        stack doesn't scare me.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <figure class="consolefig">
-      <pre class="console" id="swap-console" aria-label="Replay of the primary trial's session log"><noscript>[15:41:27] switch 001 -&gt; SCANNER01 ... success
+<!-- ═══ Work ═══ -->
+<section class="section section-alt" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Selected work</p>
+      <h2>Projects, with the logs to back them up.</h2>
+      <p class="section-sub">Every number on this page is measured, logged, or in a repository.
+      Each project opens with the short version; the engineering deep-dives are underneath.</p>
+    </div>
+
+    <!-- MEES -->
+    <article class="case case-featured reveal" id="mees">
+      <div class="case-top">
+        <div class="case-media-stack">
+          <figure>
+            <img src="assets/mees-pcb-schematic.png" width="1169" height="700" loading="lazy" alt="EasyEDA schematic of the MEES interface PCB">
+            <figcaption>The custom PCB routing power and data from the Kinova expansion port through the coupling face.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/userbridge-cli.png" width="982" height="637" loading="lazy" alt="Terminal session showing the Kinova UserBridge CLI with UART, GPIO, I2C and Ethernet commands">
+            <figcaption>UserBridge's CLI during bring-up: UART, GPIO, I²C and Ethernet tested end-to-end through the coupling.</figcaption>
+          </figure>
+        </div>
+        <div class="case-body">
+          <div class="case-meta"><span class="badge badge-accent">Dissertation · first-author paper</span><span class="case-num">01</span></div>
+          <h3>MEES — Modular End Effector System</h3>
+          <p class="case-summary">A low-cost, magnetically actuated, ISO&nbsp;9409-compliant
+          automatic tool changer for the Kinova Gen3, plus the software to run it with nobody
+          watching.</p>
+          <dl class="psr">
+            <div><dt>Problem</dt><dd>Commercial tool changers are expensive, heavy and pneumatic,
+            which lightweight cobots can't support. Designed and evaluated against a surgical
+            use-case: instruments exchanged mid-procedure, reliably, with no one stepping in.</dd></div>
+            <div><dt>What I built</dt><dd>A vision-guided ROS&nbsp;2 orchestrator that reads each
+            tool's Data Matrix code from the arm's camera; <em>UserBridge</em>, a C++ layer over
+            the Kortex SDK exposing UART, I²C, GPIO and Ethernet through the wrist; an RTOS tool
+            carousel; and a custom PCB carrying power and data across the coupling.</dd></div>
+            <div><dt>Result</dt><dd>102 consecutive autonomous swaps over 67 minutes with zero
+            mechanical failures, 147/147 overall. Failed exchanges are detected and recovered
+            automatically, tested by forcing them. New tools join with one scan and zero code
+            changes.</dd></div>
+          </dl>
+          <ul class="tags"><li>ROS 2</li><li>C++</li><li>Python</li><li>OpenCV</li><li>RTOS</li><li>PCB design</li><li>Kinova Gen3</li></ul>
+        </div>
+      </div>
+
+      <div class="deep" data-tabs>
+        <div class="tablist" role="tablist" aria-label="MEES engineering detail">
+          <button role="tab" id="t-log" aria-controls="p-log" aria-selected="true">Trial data</button>
+          <button role="tab" id="t-arch" aria-controls="p-arch" aria-selected="false" tabindex="-1">Architecture</button>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="p-log" aria-labelledby="t-log">
+          <div class="log-grid">
+            <figure class="consolefig">
+              <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tool_cycle_20260508_153554</span></div>
+              <pre class="console" id="swap-console" aria-label="Replay of the primary trial's session log"><noscript>[15:41:27] switch 001 -&gt; SCANNER01 ... success
 [15:42:03] switch 002 -&gt; GRIP01    ... success
            ... 100 more switches, every one successful ...
 session summary: 102/102 successful | 0 faults | 4011.2 s</noscript></pre>
-      <figcaption>Straight from the primary trial's session log, 8 May 2026 — real timestamps,
-      logged by the Python test driver I wrote for the rig.</figcaption>
-    </figure>
+              <figcaption>Straight from the primary trial's session log, 8 May 2026 — real
+              timestamps, logged by the Python test driver I wrote for the rig.</figcaption>
+            </figure>
+            <div class="chart-card">
+              <h4 id="chart-title">Time between consecutive tool-mount confirmations</h4>
+              <p class="sub">101 intervals · mean 36.2 s · σ 0.18 s</p>
+              <div class="chart-wrap" id="swap-chart" tabindex="0" role="group" aria-labelledby="chart-title" aria-describedby="chart-desc">
+                <div class="chart-tip" id="chart-tip" aria-live="polite"></div>
+              </div>
+              <p class="chart-note" id="chart-desc">Every one of the 101 intervals sits inside a
+              0.7-second band (the y-axis spans 35–37&nbsp;s to make that visible). The slow
+              ~0.6&nbsp;s drift across the session is real, and the kind of thing you only notice
+              when you log everything. Hover, or focus and use the arrow keys, to read swaps.
+              The 39.3&nbsp;s headline is command-to-mounted; this cadence includes the return leg.</p>
+              <details class="chart-table">
+                <summary>View all 101 values as a table</summary>
+                <div class="tscroll"><table>
+                  <thead><tr><th scope="col">Switch</th><th scope="col">Tool mounted</th><th scope="col">Interval (s)</th></tr></thead>
+                  <tbody id="swap-table"></tbody>
+                </table></div>
+              </details>
+            </div>
+          </div>
+        </div>
 
-    <div class="chart-card">
-      <h4 id="chart-title">Time between consecutive tool-mount confirmations</h4>
-      <p class="sub">101 intervals from the 102-swap trial · mean 36.2 s · σ 0.18 s</p>
-      <div class="chart-wrap" id="swap-chart" tabindex="0" role="group" aria-labelledby="chart-title" aria-describedby="chart-desc">
-        <div class="chart-tip" id="chart-tip" aria-live="polite"></div>
+        <div class="tabpanel" role="tabpanel" id="p-arch" aria-labelledby="t-arch">
+          <div class="arch-grid">
+            <div class="arch" role="group" aria-label="MEES software and hardware stack, top to bottom">
+              <button class="arch-layer" type="button" aria-pressed="true"
+                data-info="toolswitcher_node, the ROS 2 orchestrator: decides which tool the task needs, sequences the swap, and watches every exchange for faults — the part that lets the arm run with nobody in the room.">
+                <span class="al-n">5</span><span class="al-t">ROS 2 orchestrator</span><span class="ll">decision &amp; fault recovery — rclcpp / rclpy</span></button>
+              <button class="arch-layer" type="button" aria-pressed="false"
+                data-info="The vision layer reads each tool's Data Matrix barcode from the arm's own RTSP camera using OpenCV and ZXing — so the system knows what it's actually holding, not what it assumes it's holding.">
+                <span class="al-n">4</span><span class="al-t">Vision</span><span class="ll">OpenCV · ZXing · Data Matrix</span></button>
+              <button class="arch-layer" type="button" aria-pressed="false"
+                data-info="UserBridge, the C++ layer I wrote over the Kinova Kortex SDK: it exposes the arm's user expansion port to the rest of the stack and carries every command that crosses the wrist.">
+                <span class="al-n">3</span><span class="al-t">UserBridge</span><span class="ll">C++ over the Kinova Kortex SDK</span></button>
+              <button class="arch-layer" type="button" aria-pressed="false"
+                data-info="Four transports run through the custom PCB and the coupling face pads: UART and I²C for tool peripherals, GPIO for discrete signals, and Ethernet for anything hungrier.">
+                <span class="al-n">2</span><span class="al-t">Transport</span><span class="ll">UART · I²C · GPIO · Ethernet via the PCB</span></button>
+              <button class="arch-layer" type="button" aria-pressed="false"
+                data-info="At the bottom: the magnetically actuated ISO 9409 coupling, the FDM-printed carousel under RTOS control, and the actuator microcontrollers (ESP32, ATmega) that physically move things.">
+                <span class="al-n">1</span><span class="al-t">Hardware</span><span class="ll">magnetic coupling · RTOS carousel · ESP32 / ATmega</span></button>
+            </div>
+            <div class="arch-detail">
+              <p class="eyebrow">Selected layer</p>
+              <p id="arch-info" aria-live="polite">toolswitcher_node, the ROS 2 orchestrator: decides which tool the task needs, sequences the swap, and watches every exchange for faults — the part that lets the arm run with nobody in the room.</p>
+              <p class="muted small">Select a layer to see what it does.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="chart-note" id="chart-desc">Each dot is one real swap from the session log.
-      All 101 intervals sit inside a 0.7-second band — the y-axis spans 35–37&nbsp;s to make
-      that visible. The slow ~0.6&nbsp;s lengthening across the session is real too, and
-      exactly the kind of thing you only notice when you log everything. Hover, or focus the
-      chart and use the arrow keys, to read individual swaps; the table below has every
-      value. (The 39.3&nbsp;s figure quoted elsewhere is command-to-mounted per swap; this
-      cadence includes the return leg between commands.)</p>
-      <details class="chart-table">
-        <summary>view as table</summary>
-        <div class="tscroll"><table>
-          <thead><tr><th scope="col">Switch</th><th scope="col">Tool mounted</th><th scope="col">Interval (s)</th></tr></thead>
-          <tbody id="swap-table"></tbody>
-        </table></div>
-      </details>
-    </div>
+      <p class="case-foot">Platform behind my first-author ICRA paper, pending submission September 2026.
+      Repository private while the paper is in preparation.</p>
+    </article>
 
-    <h4 class="arch-title">The stack, top to bottom</h4>
-    <div class="arch" role="group" aria-label="MEES software and hardware stack, top to bottom">
-      <button class="arch-layer" type="button" aria-pressed="false"
-        data-info="toolswitcher_node, the ROS 2 orchestrator: decides which tool the task needs, sequences the swap, and watches every exchange for faults — the part that lets the arm run with nobody in the room.">
-        ROS 2 orchestrator <span class="ll">decision &amp; fault recovery — rclcpp / rclpy</span></button>
-      <button class="arch-layer" type="button" aria-pressed="false"
-        data-info="The vision layer reads each tool's Data Matrix barcode from the arm's own RTSP camera using OpenCV and ZXing — so the system knows what it's actually holding, not what it assumes it's holding.">
-        Vision <span class="ll">perception — OpenCV · ZXing · Data Matrix</span></button>
-      <button class="arch-layer" type="button" aria-pressed="false"
-        data-info="UserBridge, the C++ layer I wrote over the Kinova Kortex SDK: it exposes the arm's user expansion port to the rest of the stack and carries every command that crosses the wrist.">
-        UserBridge <span class="ll">the bridge — C++ over Kinova Kortex SDK</span></button>
-      <button class="arch-layer" type="button" aria-pressed="false"
-        data-info="Four transports run through the custom PCB and the coupling face pads: UART and I²C for tool peripherals, GPIO for discrete signals, and Ethernet for anything hungrier.">
-        Transport <span class="ll">UART · I²C · GPIO · Ethernet — through the PCB</span></button>
-      <button class="arch-layer" type="button" aria-pressed="false"
-        data-info="At the bottom: the magnetically actuated ISO 9409 coupling, the FDM-printed carousel under RTOS control, and the actuator microcontrollers (ESP32, ATmega) that physically move things.">
-        Hardware <span class="ll">magnetic coupling · RTOS carousel · ESP32 / ATmega</span></button>
-    </div>
-    <p id="arch-info">Click a layer to see what it does.</p>
-
-    <div class="figures">
-      <figure>
-        <img src="assets/mees-wrist-coupling.jpg" width="1400" height="1867" alt="The wrist-side half of the MEES magnetic coupling mounted on a Kinova Gen3 arm, with the arm's vision module above it" loading="lazy">
-        <figcaption>The wrist-side coupling half on the Gen3 — the arm's own camera, just above, does the tool identification.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/mees-pcb-schematic.png" width="1169" height="700" alt="EasyEDA schematic of the MEES interface PCB" loading="lazy">
-        <figcaption>The custom PCB that routes power and data from the Kinova expansion port through the coupling face.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/userbridge-cli.png" width="982" height="637" alt="Terminal session showing the Kinova UserBridge CLI with UART, GPIO, I2C and Ethernet commands" loading="lazy">
-        <figcaption>UserBridge's CLI during interface bring-up — UART, GPIO, I²C and Ethernet paths tested end-to-end through the coupling.</figcaption>
-      </figure>
-    </div>
-    <p class="aside">Platform behind my first-author ICRA paper, pending submission
-    September 2026. Repository private while the paper is in preparation.</p>
-  </article>
-
-  <article class="project">
-    <h3><span class="pnum">1.2</span>FIC_Interface — research-platform contributions</h3>
-    <ul class="tags"><li>ROS 2</li><li>C++</li><li>Python</li><li>MuJoCo</li><li>teleoperation</li></ul>
-    <p>FIC_Interface is the multi-robot platform for Fractal Impedance Control at Sussex's
-    Transformative Robotics Lab (TRL): real-time compliant control and teleoperation
-    across Franka and Kinova arms with a MuJoCo simulation backend. The platform and the
-    controller are the lab's work; my part is the contributor's share — extensions, device
-    integration, and the reliability fixes a live platform keeps demanding.</p>
-    <p>I built the tool-switcher extension (Data Matrix vision, a tool-pose database,
-    FIC-driven motion) and the VR playground extension and bridge used to teleoperate
-    the arms from a headset — the thread that feeds a co-authored paper in preparation
-    on ultra-low-latency teleoperation. I also enabled the Kinova gripper and wrote its
-    control loop.</p>
-    <p>The commits I'm proudest of are the boring ones: a buffer overflow, a serial-port
-    blocking bug, a Qt logging crash, and moving the barcode scanner onto its own thread.
-    Research platforms live or die on that kind of work.</p>
-
-    <div class="chart-card">
-      <h4 id="fic-title">My commits, by week and kind</h4>
-      <p class="sub">24 authored commits, May–June 2026 (merges and stashes excluded) — from the repo's git history</p>
-      <div class="chart-wrap" id="fic-timeline" tabindex="0" role="group" aria-labelledby="fic-title" aria-describedby="fic-desc">
-        <div class="chart-tip" id="fic-tip" aria-live="polite"></div>
+    <!-- FIC -->
+    <article class="case reveal" id="fic">
+      <div class="case-top case-top-rev">
+        <div class="case-media case-media-render">
+          <img src="assets/gen3-sim-render.jpg" width="1400" height="1351" loading="lazy"
+            alt="Rendered MuJoCo simulation model of a Kinova Gen3 arm with a Robotiq gripper">
+        </div>
+        <div class="case-body">
+          <div class="case-meta"><span class="badge">Research lab · contributor</span><span class="case-num">02</span></div>
+          <h3>FIC_Interface — research-platform contributions</h3>
+          <p class="case-summary">The multi-robot platform for Fractal Impedance Control at
+          Sussex's Transformative Robotics Lab (TRL): real-time compliant control and
+          teleoperation across Franka and Kinova arms, with a MuJoCo simulation backend.</p>
+          <dl class="psr">
+            <div><dt>My part</dt><dd>The platform and controller are the lab's work. I built the
+            tool-switcher extension (Data Matrix vision, tool-pose database, FIC-driven motion),
+            the VR playground and bridge for teleoperating the arms from a headset, and enabled
+            the Kinova gripper with its control loop.</dd></div>
+            <div><dt>Why it matters</dt><dd>The commits I'm proudest of are the unglamorous ones: a
+            buffer overflow, a serial-port blocking bug, a Qt logging crash, and moving the
+            barcode scanner onto its own thread. Research platforms live or die on that work.
+            The VR thread feeds a co-authored paper on ultra-low-latency teleoperation.</dd></div>
+          </dl>
+          <ul class="tags"><li>ROS 2</li><li>C++</li><li>Python</li><li>MuJoCo</li><li>Teleoperation</li><li>VR</li></ul>
+        </div>
       </div>
-      <p class="chart-note" id="fic-desc">Each dot is a day's commits in one lane; bigger
-      dot, more commits. Hover, or focus and use arrow keys, to read what each cluster
-      was. The early burst is the tool-switcher extension landing alongside the
-      reliability fixes it exposed; the June work is the VR bridge and control-tuning
-      support. The repo is the lab's and stays private — this timeline is just my slice
-      of its history.</p>
-    </div>
-
-    <div class="figures single">
-      <figure class="nofx">
-        <img src="assets/gen3-sim-render.jpg" width="1400" height="1351" alt="Rendered MuJoCo simulation model of a Kinova Gen3 arm with a Robotiq gripper, posed elbow-up on a plain paper-coloured background" loading="lazy">
-        <figcaption>The platform's simulation model of the Gen3 with its Robotiq gripper —
-        the same MuJoCo model my tool-switcher extension drives. Rendered from the sim's
-        own assets (meshes: Kinova &amp; Robotiq, via MuJoCo Menagerie).</figcaption>
-      </figure>
-    </div>
-    <p class="aside">Lab repository — private.</p>
-  </article>
-
-  <article class="project">
-    <h3><span class="pnum">1.3</span>RISC-V RV32I CPU core</h3>
-    <ul class="tags"><li>SystemVerilog</li><li>Artix-7</li><li>riscv-tests</li></ul>
-    <p>A full RV32I processor written from scratch in SystemVerilog, validated against
-    the official riscv-tests suite with self-checking testbenches, then put on real
-    hardware: it runs CoreMark on a Xilinx Artix-7 at 1.36&nbsp;CoreMark/MHz, and I
-    CRC-check the benchmark output rather than eyeball it. A five-stage pipeline with
-    hazard detection and forwarding is in progress. Building a CPU is why I trust myself
-    near the bottom of a robot's stack.</p>
-
-    <div class="chart-card">
-      <h4>rv32ui suite, fresh run</h4>
-      <p class="sub">riscv-tests on this core under Icarus Verilog · 3 Aug 2026 · 40 of 41 pass</p>
-      <div class="rv-grid" id="rv-grid">
-        <noscript>40/41 rv32ui tests pass; ma_data fails (misaligned access traps not
-        implemented); fence_i skipped (Harvard instruction memory).</noscript>
+      <div class="chart-card chart-card-wide">
+        <h4 id="fic-title">My commits, by week and kind</h4>
+        <p class="sub">24 authored commits, May–June 2026 (merges and stashes excluded), from the repo's git history</p>
+        <div class="chart-wrap" id="fic-timeline" tabindex="0" role="group" aria-labelledby="fic-title" aria-describedby="fic-desc">
+          <div class="chart-tip" id="fic-tip" aria-live="polite"></div>
+        </div>
+        <p class="chart-note" id="fic-desc">Each dot is a day's commits in one lane; bigger dot,
+        more commits. Hover, or focus and use the arrow keys, to read each cluster. The early
+        burst is the tool-switcher landing alongside the reliability fixes it exposed; June is
+        the VR bridge and control-tuning support. The repo is the lab's and stays private.</p>
       </div>
-      <p class="rv-notes">✕ <code>ma_data</code> fails, and I've left it showing: the
-      core doesn't implement misaligned-access traps yet, and I'd rather you see the
-      failing test than wonder what I dropped from the suite. – <code>fence_i</code> is
-      skipped — it needs self-modifying code, which a Harvard instruction memory can't
-      do.</p>
+    </article>
+
+    <!-- Two-up -->
+    <div class="case-pair">
+      <article class="case case-compact reveal" id="riscv">
+        <div class="case-meta"><span class="badge">Personal project</span><span class="case-num">03</span></div>
+        <h3>RISC-V RV32I CPU core</h3>
+        <p>A full RV32I processor written from scratch in SystemVerilog, validated against the
+        official riscv-tests suite with self-checking testbenches, then run on real hardware:
+        <strong>1.36&nbsp;CoreMark/MHz</strong> on a Xilinx Artix-7, with the benchmark output
+        CRC-checked. A five-stage pipeline with hazard detection and forwarding is in progress.</p>
+        <ul class="tags"><li>SystemVerilog</li><li>Vivado</li><li>Artix-7</li><li>riscv-tests</li></ul>
+        <div class="chart-card">
+          <h4>rv32ui suite, fresh run</h4>
+          <p class="sub">Icarus Verilog · 3 Aug 2026 · <span class="pass-count">40 of 41 pass</span></p>
+          <div class="rv-grid" id="rv-grid">
+            <noscript>40/41 rv32ui tests pass; ma_data fails (misaligned access traps not
+            implemented); fence_i skipped (Harvard instruction memory).</noscript>
+          </div>
+          <p class="rv-notes"><span class="k-fail">✕ ma_data</span> fails, and I've left it
+          showing: misaligned-access traps aren't implemented yet, and I'd rather you see the
+          failing test than wonder what I dropped. <span class="k-skip">– fence_i</span> is
+          skipped: it needs self-modifying code, which a Harvard instruction memory can't do.</p>
+        </div>
+      </article>
+
+      <article class="case case-compact reveal" id="firmware">
+        <div class="case-meta"><span class="badge">Open source</span><span class="case-num">04</span></div>
+        <h3>Real-time embedded firmware</h3>
+        <p>Register-level C and C++ under hard timing: ADC drivers, stepper control, sensor
+        sampling and a bare-metal data-acquisition module. The MEES carousel runs on my
+        <a href="https://github.com/Octall/Prusa-Firmware">public fork of the Prusa i3
+        firmware</a>: the carousel logic, serial protocol and application entry point are mine;
+        the retained hardware-abstraction modules are Prusa Research's.</p>
+        <ul class="tags"><li>C</li><li>C++</li><li>Bare-metal</li><li>UART</li></ul>
+        <div class="chart-card">
+          <h4>The carousel's wire protocol</h4>
+          <p class="sub">ASCII over UART · 115200 8N1 · OK only after motion physically completes</p>
+          <pre class="proto-exchange" aria-label="Example protocol exchange"><span class="who">host  →</span> <span class="host">N1 TOOL A</span>
+<span class="who">dev   →</span> <span class="dev">OK N1</span>
+<span class="who">host  →</span> <span class="host">N2 HOME</span>
+<span class="who">dev   →</span> <span class="err">ERROR PINDA home failed N2</span></pre>
+          <div class="proto-chips" role="group" aria-label="Protocol commands">
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="HOME [X] [Y] [Z] [ALL] — homes the selected axes against their endstops; the reply doesn't come back until homing has physically finished.">HOME</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="MOVE [X&lt;mm&gt;] [Y&lt;mm&gt;] [Z&lt;mm&gt;] [E&lt;mm&gt;] [F&lt;mm/min&gt;] — axis moves in millimetres at a chosen feedrate.">MOVE</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="ROTATE D&lt;degrees&gt; [F&lt;mm/min&gt;] — spins the carousel by a given angle.">ROTATE</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="TOOL &lt;A|B|C&gt; — indexes the carousel to a named tool slot; the arm only moves in to engage once OK confirms the slot is in position.">TOOL</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="WAIT — blocks until all motion is complete; the synchronous barrier the orchestrator leans on.">WAIT</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="ESTOP — immediate stop.">ESTOP</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="ENABLE — re-enables the stepper drivers after a stop.">ENABLE</button>
+            <button class="proto-chip" type="button" aria-pressed="false" data-info="READ / STATUS — sensor, position and configuration readback: data lines first, then a final OK.">READ · STATUS</button>
+          </div>
+          <p id="proto-info" class="proto-info" aria-live="polite">Select a command to see what it does. Any
+          command can carry an N&lt;seq&gt; prefix, echoed in the reply, so a lost reply can be
+          retried without wondering whether the original command already ran.</p>
+        </div>
+      </article>
     </div>
-  </article>
 
-  <article class="project">
-    <h3><span class="pnum">1.4</span>Real-time embedded firmware</h3>
-    <ul class="tags"><li>C</li><li>C++</li><li>bare-metal</li></ul>
-    <p>Register-level C and C++ under hard timing: ADC drivers, stepper control, sensor
-    sampling, and a bare-metal data-acquisition module built from scratch. The MEES
-    carousel runs on my
-    <a href="https://github.com/Octall/Prusa-Firmware">public fork of the Prusa i3
-    firmware</a> — the carousel logic, serial protocol, and application entry point are
-    mine; the retained hardware-abstraction modules are Prusa Research's.</p>
-
-    <div class="chart-card">
-      <h4>The carousel's wire protocol</h4>
-      <p class="sub">line-oriented ASCII over UART · 115200 8N1 · synchronous — OK only lands after the motion physically completes</p>
-      <pre class="proto-exchange" aria-label="Example protocol exchange">host    → <span class="host">N1 TOOL A</span>
-device  → <span class="dev">OK N1</span>
-host    → <span class="host">N2 HOME</span>
-device  → <span class="err">ERROR PINDA home failed N2</span></pre>
-      <div class="proto-chips" role="group" aria-label="Protocol commands">
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="HOME [X] [Y] [Z] [ALL] — homes the selected axes against their endstops; the reply doesn't come back until homing has physically finished.">HOME</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="MOVE [X&lt;mm&gt;] [Y&lt;mm&gt;] [Z&lt;mm&gt;] [E&lt;mm&gt;] [F&lt;mm/min&gt;] — axis moves in millimetres at a chosen feedrate.">MOVE</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="ROTATE D&lt;degrees&gt; [F&lt;mm/min&gt;] — spins the carousel by a given angle.">ROTATE</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="TOOL &lt;A|B|C&gt; — indexes the carousel to a named tool slot; the arm only moves in to engage once OK confirms the slot is in position.">TOOL</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="WAIT — blocks until all motion is complete; the synchronous barrier the orchestrator leans on.">WAIT</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="ESTOP — immediate stop.">ESTOP</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="ENABLE — re-enables the stepper drivers after a stop.">ENABLE</button>
-        <button class="proto-chip" type="button" aria-pressed="false" data-info="READ / STATUS — sensor, position and configuration readback: data lines first, then a final OK.">READ · STATUS</button>
+    <article class="case case-slim reveal" id="uas">
+      <div>
+        <div class="case-meta"><span class="badge">University team · concept only</span><span class="case-num">05</span></div>
+        <h3>Redundant UAS navigation — design study</h3>
       </div>
-      <p id="proto-info">Click a command to see what it does. Any command can carry an
-      N&lt;seq&gt; prefix, echoed back in the reply — so a lost reply can be retried
-      without wondering whether the original command already ran.</p>
-    </div>
-  </article>
-
-  <article class="project">
-    <h3><span class="pnum">1.5</span>Redundant UAS navigation — design study</h3>
-    <ul class="tags"><li>autonomy</li><li>state estimation</li><li>concept only</li></ul>
-    <p>Control-engineering lead for a university team's design study: sensor- and
-    control-redundant navigation that holds a usable position and state estimate under
-    GPS denial and degrades gracefully as sensors drop out. Concept and early design
-    only — the airframe was never built, and I'd rather tell you that here than have
-    you find out in an interview.</p>
-  </article>
-</section>
-
-<section id="research" class="wrap">
-  <div class="sec-head"><span class="secnum">2.0</span><h2>Research</h2></div>
-  <ul class="papers">
-    <li>
-      <strong>Autonomous tool switching for lightweight robotic arms</strong> — first author.
-      <span class="status">ICRA — pending submission, September 2026</span>
-    </li>
-    <li>
-      <strong>Ultra-low-latency communication for teleoperation and high-speed robotic control</strong> — co-author.
-      <span class="status">in preparation</span>
-    </li>
-  </ul>
-</section>
-
-<section id="skills" class="wrap">
-  <div class="sec-head"><span class="secnum">3.0</span><h2>Skills</h2></div>
-  <div class="skills">
-    <div><h3>Robotics</h3><p>ROS 2 (rclcpp / rclpy) · OpenCV · control · state estimation · Kinova Kortex SDK · MuJoCo</p></div>
-    <div><h3>Languages</h3><p>C++ · Python · C · OCaml · TypeScript</p></div>
-    <div><h3>Embedded &amp; real-time</h3><p>Bare-metal C · RTOS · ESP32 · ATmega · Arduino</p></div>
-    <div><h3>Interfaces</h3><p>UART · I²C · SPI · GPIO · Ethernet · RTSP</p></div>
-    <div><h3>Testing</h3><p>Self-checking testbenches · fault injection &amp; cycle logging · Python test tooling</p></div>
-    <div><h3>FPGA &amp; digital</h3><p>SystemVerilog · VHDL · Vivado (Artix-7)</p></div>
-    <div><h3>Tools</h3><p>Linux · Git · CMake · GDB</p></div>
+      <p>Control-engineering lead for a university team's design study: sensor- and
+      control-redundant navigation that holds a usable position and state estimate under GPS
+      denial and degrades gracefully as sensors drop out. Concept and early design only; the
+      airframe was never built, and I'd rather say so here than have you find out in an
+      interview.</p>
+    </article>
   </div>
 </section>
 
-<section id="about" class="wrap about">
-  <div class="sec-head"><span class="secnum">4.0</span><h2>About</h2></div>
-  <p>I've been programming for seven years, mostly software; the last few have pulled me
-  toward hardware, and robotics is where the two meet. I care more about whether
-  something holds up once it's actually running than whether it demos cleanly — most of
-  my favourite commits are fixes nobody will ever notice.</p>
-  <p>I speak English (C1 certified — my whole degree was taught in it) and Arabic
-  (native). Based in Brighton, UK, and happy to relocate for the right team.</p>
+<!-- ═══ Experience & research ═══ -->
+<section class="section" id="experience">
+  <div class="container exp-grid">
+    <div>
+      <div class="section-head reveal">
+        <p class="eyebrow">Experience &amp; education</p>
+        <h2>Where I've done the work.</h2>
+      </div>
+      <ol class="timeline">
+        <li class="reveal">
+          <span class="tl-when">2026</span>
+          <h3>BEng Robotics Engineering &amp; Mechatronics</h3>
+          <p class="tl-where">University of Sussex · <strong>First Class Honours</strong></p>
+          <p>Dissertation: MEES, the autonomous tool-changing system above, now the basis of a first-author paper.</p>
+        </li>
+        <li class="reveal">
+          <span class="tl-when">May – Jun 2026</span>
+          <h3>Platform contributor, FIC_Interface</h3>
+          <p class="tl-where">Transformative Robotics Lab (TRL), University of Sussex</p>
+          <p>Extensions, device integration and reliability fixes on the lab's multi-robot compliant-control platform; 24 authored commits.</p>
+        </li>
+        <li class="reveal">
+          <span class="tl-when">University team</span>
+          <h3>Control-engineering lead, UAS design study</h3>
+          <p class="tl-where">Redundant navigation under GPS denial</p>
+          <p>Led the control side of a concept-stage design for sensor- and control-redundant navigation.</p>
+        </li>
+      </ol>
+    </div>
+    <aside class="research reveal" aria-labelledby="research-title">
+      <p class="eyebrow" id="research-title">Research</p>
+      <ul class="papers">
+        <li>
+          <span class="badge badge-accent">First author</span>
+          <strong>Autonomous tool switching for lightweight robotic arms</strong>
+          <span class="status">ICRA — pending submission, September 2026</span>
+        </li>
+        <li>
+          <span class="badge">Co-author</span>
+          <strong>Ultra-low-latency communication for teleoperation and high-speed robotic control</strong>
+          <span class="status">In preparation</span>
+        </li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══ Skills ═══ -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Technical skills</p>
+      <h2>The toolkit, grouped by where it sits in the stack.</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-group reveal"><h3>Robotics</h3><ul><li class="core">ROS 2 (rclcpp / rclpy)</li><li class="core">OpenCV</li><li>Control</li><li>State estimation</li><li>Kinova Kortex SDK</li><li>MuJoCo</li></ul></div>
+      <div class="skill-group reveal"><h3>Languages</h3><ul><li class="core">C++</li><li class="core">Python</li><li class="core">C</li><li>OCaml</li><li>TypeScript</li></ul></div>
+      <div class="skill-group reveal"><h3>Embedded &amp; real-time</h3><ul><li class="core">Bare-metal C</li><li class="core">RTOS</li><li>ESP32</li><li>ATmega</li><li>Arduino</li></ul></div>
+      <div class="skill-group reveal"><h3>Interfaces</h3><ul><li>UART</li><li>I²C</li><li>SPI</li><li>GPIO</li><li>Ethernet</li><li>RTSP</li></ul></div>
+      <div class="skill-group reveal"><h3>FPGA &amp; digital</h3><ul><li class="core">SystemVerilog</li><li>VHDL</li><li>Vivado (Artix-7)</li></ul></div>
+      <div class="skill-group reveal"><h3>Testing &amp; tools</h3><ul><li class="core">Self-checking testbenches</li><li>Fault injection</li><li>Cycle logging</li><li>Linux</li><li>Git</li><li>CMake</li><li>GDB</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ About ═══ -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="section-head reveal">
+      <p class="eyebrow">About</p>
+      <h2>Software first, then the hardware pulled me in.</h2>
+    </div>
+    <div class="about-copy reveal">
+      <p>I've been programming for seven years, mostly software; the last few have pulled me
+      toward hardware, and robotics is where the two meet. I care more about whether something
+      holds up once it's actually running than whether it demos cleanly — most of my favourite
+      commits are fixes nobody will ever notice.</p>
+      <p>I speak English (C1 certified; my whole degree was taught in it) and Arabic (native).
+      I'm based in Brighton, UK, and happy to relocate for the right team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Contact ═══ -->
+<section class="contact-band" id="contact">
+  <div class="container contact-inner">
+    <div>
+      <p class="eyebrow">Let's talk</p>
+      <h2>Building robots, embedded systems or control software? I'd like to hear about it.</h2>
+      <p>Based in Brighton, UK, and open to relocating for the right team.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="btn btn-light" href="mailto:m.sadeq@tasarro.co.uk">m.sadeq@tasarro.co.uk</a>
+      <button class="btn btn-outline-light" type="button" id="copy-email" data-email="m.sadeq@tasarro.co.uk" hidden>Copy email</button>
+      <a class="btn btn-outline-light" href="https://github.com/Octall">github.com/Octall</a>
+    </div>
+  </div>
 </section>
 </main>
 
-<footer id="contact">
-  <div class="wrap">
-    <p class="spec-caption">5.0 — Contact</p>
-    <div class="contact">
-      <a href="mailto:m.sadeq@tasarro.co.uk">m.sadeq@tasarro.co.uk</a>
-      <a href="https://github.com/Octall">github.com/Octall</a>
-    </div>
-    <p class="fine">DRW M. SADEQ · SHT 1 OF 1 · REV 05 · hand-written HTML &amp; CSS — no framework, no tracking · © 2026</p>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 Mahmoud Sadeq</p>
+    <p>Hand-written HTML, CSS &amp; JavaScript — no framework, no tracking.</p>
   </div>
 </footer>
 </body>

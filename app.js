@@ -1,4 +1,4 @@
-/* mahmoud.tasarro.co.uk v2 — vanilla JS, no dependencies.
+/* mahmoud.tasarro.co.uk v6 — vanilla JS, no dependencies.
    All numbers below are real data from the primary MEES reliability trial
    (tool_cycle_20260508_153554.xml): [switch index, seconds since previous
    confirmation, tool S=SCANNER01 G=GRIP01]. */
@@ -19,6 +19,31 @@ const CONSOLE_LINES = [
 const TOOL = { S: "SCANNER01", G: "GRIP01" };
 const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* run fn once, the first time el scrolls into view */
+function whenVisible(el, fn, threshold = 0.3) {
+  if (!el) return;
+  if (!("IntersectionObserver" in window)) { fn(); return; }
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((en) => en.isIntersecting)) { io.disconnect(); fn(); }
+  }, { threshold });
+  io.observe(el);
+}
+
+/* position a chart tooltip at viewBox point (px, py), kept inside the chart */
+function placeTip(tip, wrap, px, py, W, H) {
+  /* the svg may be wider than its wrapper on phones (wrapper scrolls) */
+  const svg = wrap.querySelector("svg");
+  const w = wrap.getBoundingClientRect();
+  const r = svg.getBoundingClientRect();
+  const x0 = r.left - w.left + wrap.scrollLeft;
+  tip.style.display = "block";
+  const half = tip.offsetWidth / 2;
+  let left = x0 + (px / W) * r.width;
+  left = Math.max(wrap.scrollLeft + half, Math.min(wrap.scrollLeft + wrap.clientWidth - half, left));
+  tip.style.left = left + "px";
+  tip.style.top = (r.top - w.top) + (py / H) * r.height + "px";
+}
+
 /* ── stat count-up ─────────────────────────────────────────── */
 function countUps() {
   document.querySelectorAll(".stat b[data-count]").forEach((el) => {
@@ -27,16 +52,18 @@ function countUps() {
     const target = parseFloat(el.dataset.count);
     const dec = parseInt(el.dataset.dec || "0", 10);
     const suffix = el.dataset.suffix || "";
-    const t0 = performance.now();
-    const D = 900;
-    function step(now) {
-      const p = Math.min((now - t0) / D, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = (target * eased).toFixed(dec) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-      else el.innerHTML = finalHTML;
-    }
-    requestAnimationFrame(step);
+    const D = 1100;
+    whenVisible(el, () => {
+      const t0 = performance.now();
+      function step(now) {
+        const p = Math.min((now - t0) / D, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.innerHTML = finalHTML;
+      }
+      requestAnimationFrame(step);
+    }, 0.6);
   });
 }
 
@@ -60,8 +87,9 @@ function consoleReplay() {
     render(CONSOLE_LINES[i]);
     i += 1;
     if (i < CONSOLE_LINES.length) setTimeout(tick, i >= 6 ? 650 : 360);
+    else pre.classList.remove("cursor");
   };
-  setTimeout(tick, 500);
+  whenVisible(pre, () => setTimeout(tick, 300));
 }
 
 /* ── swap-interval chart ───────────────────────────────────── */
@@ -99,7 +127,7 @@ function chart() {
 
   // mean reference (selective label, not a gridline)
   S("line", { x1: L, x2: L + PW, y1: y(36.2), y2: y(36.2), class: "meanline" }, svg);
-  S("text", { x: L + PW, y: y(36.2) - 5, class: "meanlabel", "text-anchor": "end" }, svg).textContent = "mean 36.2 s";
+  S("text", { x: L + 6, y: y(36.2) - 7, class: "meanlabel", "text-anchor": "start" }, svg).textContent = "mean 36.2 s";
 
   // series
   const d = INTERVALS.map((p, k) => (k ? "L" : "M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1)).join(" ");
@@ -119,11 +147,8 @@ function chart() {
     cross.setAttribute("visibility", "visible");
     hi.setAttribute("cx", px); hi.setAttribute("cy", py);
     hi.setAttribute("visibility", "visible");
-    const rect = wrap.getBoundingClientRect();
-    tip.style.left = (px / W) * rect.width + "px";
-    tip.style.top = (py / H) * rect.height + "px";
-    tip.style.display = "block";
     tip.textContent = `#${String(i).padStart(3, "0")} · ${TOOL[tool]} · ${dt.toFixed(1)} s`;
+    placeTip(tip, wrap, px, py, W, H);
   };
   const hide = () => {
     cross.setAttribute("visibility", "hidden");
@@ -132,7 +157,7 @@ function chart() {
   };
 
   wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
+    const rect = svg.getBoundingClientRect();
     const vx = ((e.clientX - rect.left) / rect.width) * W;
     let best = 0, bd = Infinity;
     INTERVALS.forEach((p, k) => {
@@ -257,17 +282,14 @@ function ficTimeline() {
   const show = (k) => {
     cur = (k + FIC_COMMITS.length) % FIC_COMMITS.length;
     const c = FIC_COMMITS[cur];
-    const rect = wrap.getBoundingClientRect();
-    tip.style.left = (x(c.day) / W) * rect.width + "px";
-    tip.style.top = (laneY(c.lane) / H) * rect.height + "px";
-    tip.style.display = "block";
     const date = c.day <= 30 ? `${c.day + 1} May` : `${c.day - 30} Jun`;
     tip.textContent = `${date} · ${c.n} commit${c.n > 1 ? "s" : ""} · ${c.label}`;
+    placeTip(tip, wrap, x(c.day), laneY(c.lane) - 8, W, H);
   };
   const hide = () => { tip.style.display = "none"; };
 
   wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
+    const rect = svg.getBoundingClientRect();
     const vx = ((e.clientX - rect.left) / rect.width) * W;
     const vy = ((e.clientY - rect.top) / rect.height) * H;
     let best = -1, bd = Infinity;
@@ -340,3 +362,92 @@ function protoChips() {
 ficTimeline();
 rvGrid();
 protoChips();
+
+/* ══ v6: page chrome ═══════════════════════════════════════════ */
+
+/* accessible tabs (WAI-ARIA tabs pattern, manual activation on click/arrow) */
+function tabs() {
+  document.querySelectorAll("[data-tabs]").forEach((root) => {
+    const tabsEls = [...root.querySelectorAll('[role="tab"]')];
+    const select = (tab, focus) => {
+      tabsEls.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) tab.focus();
+    };
+    tabsEls.forEach((t, k) => {
+      t.addEventListener("click", () => select(t));
+      t.addEventListener("keydown", (e) => {
+        let n = -1;
+        if (e.key === "ArrowRight") n = (k + 1) % tabsEls.length;
+        else if (e.key === "ArrowLeft") n = (k - 1 + tabsEls.length) % tabsEls.length;
+        else if (e.key === "Home") n = 0;
+        else if (e.key === "End") n = tabsEls.length - 1;
+        if (n >= 0) { e.preventDefault(); select(tabsEls[n], true); }
+      });
+    });
+    select(tabsEls.find((t) => t.getAttribute("aria-selected") === "true") || tabsEls[0]);
+  });
+}
+
+/* sticky-nav border, mobile menu, and current-section highlight */
+function nav() {
+  const bar = document.getElementById("site-nav");
+  const toggle = document.querySelector(".nav-toggle");
+  const list = document.getElementById("nav-links");
+  if (!bar || !list) return;
+
+  const onScroll = () => bar.classList.toggle("scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const close = () => { list.classList.remove("open"); toggle && toggle.setAttribute("aria-expanded", "false"); };
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const open = !list.classList.contains("open");
+      list.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    list.addEventListener("click", (e) => { if (e.target.closest("a")) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+  }
+
+  const links = [...list.querySelectorAll('a[href^="#"]')];
+  const sections = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  if (!("IntersectionObserver" in window) || !sections.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      links.forEach((a) => {
+        const on = a.getAttribute("href") === "#" + en.target.id;
+        a.classList.toggle("active", on);
+        if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+      });
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  sections.forEach((s) => io.observe(s));
+}
+
+/* copy-email button: only shown where the Clipboard API exists */
+function copyEmail() {
+  const btn = document.getElementById("copy-email");
+  if (!btn || !navigator.clipboard) return;
+  btn.hidden = false;
+  const label = btn.textContent;
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.email);
+      btn.textContent = "Copied ✓";
+    } catch (_) {
+      btn.textContent = "Couldn't copy";
+    }
+    setTimeout(() => { btn.textContent = label; }, 2000);
+  });
+}
+
+tabs();
+nav();
+copyEmail();
