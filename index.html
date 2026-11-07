@@ -214,40 +214,7 @@ session summary: 102/102 successful | 0 faults | 4011.2 s</noscript></pre>
   </article>
 
   <article class="project">
-    <h3><span class="pnum">1.3</span>ART_FIC — live autotuning for the FIC controller</h3>
-    <ul class="tags"><li>Python</li><li>MuJoCo</li><li>control</li><li>autotuning</li></ul>
-    <p>Impedance controllers are only as good as their gains, and gains get tuned by
-    hand, at the end of long afternoons, by whoever's patience runs out last. ART_FIC
-    wraps the lab's ART regime-memory autotuner — a companion library, pulled in as a
-    submodule, not my work — around the FIC controller so it can tune itself: against a
-    MuJoCo pendulum, a physical servo rig, and the 7-DOF Gen3 model. I wrote the FIC
-    wrapper, the experiment suite, and the config round-trip, so whatever the tuner
-    settles on lands in the same <code>config.xml</code> the lab's C++ stack loads on
-    the real arms.</p>
-
-    <div class="chart-card">
-      <h4>One autotune sweep, from the experiment logs</h4>
-      <p class="sub">auto_sweep.json · 6 hold angles · identified payload residual → tuned stiffness</p>
-      <div class="art-panels">
-        <div class="art-panel"><p class="art-t">identified gravity residual [N·m]</p><div id="art-res"></div></div>
-        <div class="art-panel"><p class="art-t">stiffness the tuner chose [N·m/rad]</p><div id="art-k"></div></div>
-      </div>
-      <p class="chart-note">Held at six angles off rest, the tuner works out how hard
-      gravity is pulling on the payload at each one, then picks a stiffness to match —
-      more lean, more torque, more K. Real numbers from one sweep in the project's
-      logs; hover or tab to a dot to read a point.</p>
-      <details class="chart-table">
-        <summary>view as table</summary>
-        <div class="tscroll"><table>
-          <thead><tr><th scope="col">Angle off rest (rad)</th><th scope="col">Residual (N·m)</th><th scope="col">K tuned (N·m/rad)</th></tr></thead>
-          <tbody id="art-table"></tbody>
-        </table></div>
-      </details>
-    </div>
-  </article>
-
-  <article class="project">
-    <h3><span class="pnum">1.4</span>RISC-V RV32I CPU core</h3>
+    <h3><span class="pnum">1.3</span>RISC-V RV32I CPU core</h3>
     <ul class="tags"><li>SystemVerilog</li><li>Artix-7</li><li>riscv-tests</li></ul>
     <p>A full RV32I processor written from scratch in SystemVerilog, validated against
     the official riscv-tests suite with self-checking testbenches, then put on real
@@ -272,7 +239,7 @@ session summary: 102/102 successful | 0 faults | 4011.2 s</noscript></pre>
   </article>
 
   <article class="project">
-    <h3><span class="pnum">1.5</span>Real-time embedded firmware</h3>
+    <h3><span class="pnum">1.4</span>Real-time embedded firmware</h3>
     <ul class="tags"><li>C</li><li>C++</li><li>bare-metal</li></ul>
     <p>Register-level C and C++ under hard timing: ADC drivers, stepper control, sensor
     sampling, and a bare-metal data-acquisition module built from scratch. The MEES
@@ -305,7 +272,7 @@ device  → <span class="err">ERROR PINDA home failed N2</span></pre>
   </article>
 
   <article class="project">
-    <h3><span class="pnum">1.6</span>Redundant UAS navigation — design study</h3>
+    <h3><span class="pnum">1.5</span>Redundant UAS navigation — design study</h3>
     <ul class="tags"><li>autonomy</li><li>state estimation</li><li>concept only</li></ul>
     <p>Control-engineering lead for a university team's design study: sensor- and
     control-redundant navigation that holds a usable position and state estimate under

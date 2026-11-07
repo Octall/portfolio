@@ -204,7 +204,7 @@ const FIC_LANES = ["Extensions & VR", "Reliability fixes", "Device & platform", 
 const FIC_COMMITS = [
   { lane: 0, day: 2,  n: 2, label: "tool-switcher extension · live cam feed" },
   { lane: 0, day: 36, n: 2, label: "initial VR playground · VR updates" },
-  { lane: 0, day: 45, n: 1, label: "ART_FIC extension work" },
+  { lane: 0, day: 45, n: 1, label: "autotuning extension work" },
   { lane: 1, day: 2,  n: 5, label: "buffer overflow · serial blocking · Qt logging crash · scanner moved to its own thread · vision fix" },
   { lane: 2, day: 33, n: 2, label: "Kinova gripper enabled + control loop · libfranka 0.17 → 0.18" },
   { lane: 2, day: 34, n: 1, label: "async position-control example (CMake)" },
@@ -340,58 +340,3 @@ function protoChips() {
 ficTimeline();
 rvGrid();
 protoChips();
-
-/* ══ v5: ART autotuner sweep — real data from ART_FIC/out/auto_sweep.json ══ */
-const ART_SWEEP = [
-  { rel: 0.2, res: 0.0933, K: 3.111 },
-  { rel: 0.3, res: 0.1007, K: 3.358 },
-  { rel: 0.4, res: 0.1308, K: 4.360 },
-  { rel: 0.5, res: 0.1715, K: 5.715 },
-  { rel: 0.6, res: 0.2008, K: 6.693 },
-  { rel: 0.7, res: 0.2170, K: 7.235 },
-];
-
-function artPanel(hostId, key, yMax, fmt) {
-  const host = document.getElementById(hostId);
-  if (!host) return;
-  const W = 340, H = 230, L = 44, R = 12, T = 12, B = 30;
-  const PW = W - L - R, PH = H - T - B;
-  const x = (v) => L + ((v - 0.15) / (0.75 - 0.15)) * PW;
-  const y = (v) => T + ((yMax - v) / yMax) * PH;
-  const NS = "http://www.w3.org/2000/svg";
-  const S = (tag, attrs, parent) => {
-    const el = document.createElementNS(NS, tag);
-    for (const k in attrs) el.setAttribute(k, attrs[k]);
-    parent.appendChild(el);
-    return el;
-  };
-  const svg = S("svg", { viewBox: `0 0 ${W} ${H}` }, host);
-  [0, yMax / 2, yMax].forEach((v) => {
-    S("line", { x1: L, x2: L + PW, y1: y(v), y2: y(v), class: "axis" }, svg);
-    S("text", { x: L - 6, y: y(v) + 3.5, class: "tick", "text-anchor": "end" }, svg).textContent = fmt(v);
-  });
-  [0.2, 0.4, 0.6].forEach((v) => {
-    S("text", { x: x(v), y: T + PH + 18, class: "tick", "text-anchor": "middle" }, svg).textContent = v.toFixed(1);
-  });
-  S("text", { x: L + PW / 2, y: H - 2, class: "tick", "text-anchor": "middle" }, svg).textContent = "hold angle off rest [rad]";
-  const d = ART_SWEEP.map((p, k) => (k ? "L" : "M") + x(p.rel).toFixed(1) + " " + y(p[key]).toFixed(1)).join(" ");
-  S("path", { d, class: "series" }, svg);
-  ART_SWEEP.forEach((p) => {
-    const c = S("circle", { cx: x(p.rel), cy: y(p[key]), r: 3.4, class: "dot", tabindex: 0 }, svg);
-    S("title", {}, c).textContent = `${p.rel.toFixed(1)} rad → ${fmt(p[key])}`;
-  });
-  const last = ART_SWEEP[ART_SWEEP.length - 1];
-  S("text", { x: x(last.rel) - 6, y: y(last[key]) - 8, class: "endlabel", "text-anchor": "end" }, svg).textContent = fmt(last[key]);
-}
-
-function artChart() {
-  artPanel("art-res", "res", 0.25, (v) => v.toFixed(2));
-  artPanel("art-k", "K", 8, (v) => v.toFixed(1));
-  const tbody = document.getElementById("art-table");
-  if (tbody) ART_SWEEP.forEach((p) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${p.rel.toFixed(1)}</td><td>${p.res.toFixed(4)}</td><td>${p.K.toFixed(3)}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-artChart();
